@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 import org.junit.Ignore;
 
 import org.junit.Test;
+import org.junit.Ignore;
 
 import com.model.BankDatabase;
 import com.model.CashDispenser;
@@ -35,7 +36,6 @@ public class WithdrawalModelTest {
     }
 
     @Test
-<<<<<<< HEAD
     public void testSetAmount()
     {
         /**
@@ -49,8 +49,27 @@ public class WithdrawalModelTest {
         assertEquals(withdrawal.getAmount(), 90);
     }
 
-=======
-    public void executeCashDispenserNotEnoughTest()
+    @Test
+    public void getAmountTest()
+    {
+        /**
+         * Description: Menguji fungsionalitas fungsi getAmount.
+         * Author: Zara Veda
+         */
+        bankDatabase = new BankDatabase();
+        userAccountNumber = 1234;
+		cashDispenser = new CashDispenser();
+        Withdrawal withdrawal = new Withdrawal(userAccountNumber, bankDatabase, cashDispenser);
+        
+        int expectedAmount = 100;
+        withdrawal.setAmount(expectedAmount);
+        int actualAmount = withdrawal.getAmount();
+        assertEquals(expectedAmount, actualAmount);
+    }
+
+    @Test
+    @Ignore
+    public void executeRemainingCashDispenserEqualToZeroTest()
     {
         /**
          * Description: Menguji proses Withdrawal jika Cash Dispenser kurang.
@@ -58,10 +77,30 @@ public class WithdrawalModelTest {
          */
         bankDatabase = new BankDatabase();
         userAccountNumber = 1212;
-        bankDatabase.addAccount(new Account(userAccountNumber, 4321, 1000.0, 1200.0, 2, 1));
+        bankDatabase.addAccount(new Account(userAccountNumber, 4321, 100.0, 200.0, 2, 1));
 		cashDispenser = new CashDispenser();
+
         Withdrawal withdrawal = new Withdrawal(userAccountNumber, bankDatabase, cashDispenser);
-        withdrawal.setAmount(260);
+        withdrawal.setAmount(100);
+        int actualStatus = withdrawal.execute();
+        assertEquals(CASHDISPENSER_NOT_ENOUGH, actualStatus);
+    }
+
+    @Test
+    @Ignore
+    public void executeRemainingCashDispenserEqualToOneTest()
+    {
+        /**
+         * Description: Menguji proses Withdrawal jika Cash Dispenser kurang.
+         * Author: Zara Veda
+         */
+        bankDatabase = new BankDatabase();
+        userAccountNumber = 1212;
+        bankDatabase.addAccount(new Account(userAccountNumber, 4321, 100.0, 200.0, 2, 1));
+		cashDispenser = new CashDispenser();
+
+        Withdrawal withdrawal = new Withdrawal(userAccountNumber, bankDatabase, cashDispenser);
+        withdrawal.setAmount(80);
         int actualStatus = withdrawal.execute();
         assertEquals(CASHDISPENSER_NOT_ENOUGH, actualStatus);
     }
@@ -76,6 +115,8 @@ public class WithdrawalModelTest {
         bankDatabase = new BankDatabase();
         userAccountNumber = 1235;
         cashDispenser = new CashDispenser();
+        cashDispenser.addCount(25);
+
         Withdrawal withdrawal = new Withdrawal(userAccountNumber, bankDatabase, cashDispenser);
         withdrawal.setAmount(500);
         int actualStatus = withdrawal.execute();
@@ -92,6 +133,8 @@ public class WithdrawalModelTest {
         bankDatabase = new BankDatabase();
         userAccountNumber = 1234;
 		cashDispenser = new CashDispenser();
+        cashDispenser.addCount(5);
+
         Withdrawal withdrawal = new Withdrawal(userAccountNumber, bankDatabase, cashDispenser);
         withdrawal.setAmount(100);
         int actualStatus = withdrawal.execute();
@@ -113,24 +156,4 @@ public class WithdrawalModelTest {
         int actualStatus = withdrawal.execute();
         assertEquals(WITHDRAWAL_CANCELED, actualStatus);
     }
-
-    @Test
-    public void getAmountTest()
-    {
-        /**
-         * Description:
-         * Menguji fungsionalitas fungsi getAmount.
-         * Author: Zara Veda
-         */
-        bankDatabase = new BankDatabase();
-        userAccountNumber = 1234;
-		cashDispenser = new CashDispenser();
-        Withdrawal withdrawal = new Withdrawal(userAccountNumber, bankDatabase, cashDispenser);
-        
-        int expectedAmount = 100;
-        withdrawal.setAmount(expectedAmount);
-        int actualAmount = withdrawal.getAmount();
-        assertEquals(expectedAmount, actualAmount);
-    }
->>>>>>> 7f6a315 (create test for Withdrawal model)
 }
