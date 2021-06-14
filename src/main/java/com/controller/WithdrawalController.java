@@ -11,7 +11,7 @@ public class WithdrawalController extends TransactionController{
 
 	public WithdrawalController(Transaction theTransaction, Keypad theKeypad, Screen theScreen) {
 		super(theTransaction, theKeypad, theScreen);
-		// TODO Auto-generated constructor stub
+		//TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -21,7 +21,7 @@ public class WithdrawalController extends TransactionController{
 		Screen screen = getScreen(); // get screen reference
 		int idxamount;
 		int statusProcess;   
-
+		int input = 1;
 		// loop while no valid choice has been made on withdrawal option menu
 		do {
 			idxamount = displayMenuOfAmounts();
@@ -65,7 +65,8 @@ public class WithdrawalController extends TransactionController{
 	
 	// display a menu of withdrawal amounts and the option to cancel;
 	// return the chosen amount or 0 if the user chooses to cancel
-	private int displayMenuOfAmounts() {
+	// TODO make the function private
+	public int displayMenuOfAmounts() {
 		int userChoice = 0; // local variable to store return value
 
 		Screen screen = getScreen(); // get screen reference
@@ -85,8 +86,9 @@ public class WithdrawalController extends TransactionController{
 		screen.displayMessageLine("6 - Other amount");
 		screen.displayMessageLine("7 - Cancel transaction");
 		screen.displayMessage("\nChoose a withdrawal amount: ");
-
-		int input = keypad.getInput(); // get user input through keypad
+		
+		
+		int input = keypad.getInput();
 		// determine how to proceed based on the input value
 		switch (input) {
 			case 1: // if the user chose a withdrawal amount 

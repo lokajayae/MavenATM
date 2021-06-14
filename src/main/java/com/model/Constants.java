@@ -49,9 +49,9 @@ public class Constants {
     
     
     //number of pieces of fraction value 20 in cash dispenser
-    public final static int INITIAL_COUNT_CASHDISPINSER = 5;
+    public final static int INITIAL_COUNT_CASHDISPINSER = 10;
     public final static int NOMINAL_AMOUNT = 20;
-    public final static int MAX_COUNT_CASHDISPINSER = 5;
+    public final static int MAX_COUNT_CASHDISPINSER = 500;
    
     // constant corresponding to range value transfer amount
    	public final static int MIN_WITHDRAW_AMOUNT = 20;

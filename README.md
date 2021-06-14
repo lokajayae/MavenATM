@@ -21,6 +21,7 @@ mvn test
 
 ## Deploy the Test to SonarQube
 ```
+mvn clean install
 mvn clean verify sonar:sonar -D sonar.login=myToken
 ```
 
