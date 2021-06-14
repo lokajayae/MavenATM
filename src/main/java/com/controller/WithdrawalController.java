@@ -20,8 +20,7 @@ public class WithdrawalController extends TransactionController{
 		Withdrawal transaction = (Withdrawal) getTransaction();
 		Screen screen = getScreen(); // get screen reference
 		int idxamount;
-		int statusProcess;   
-		int input = 1;
+		int statusProcess;
 		// loop while no valid choice has been made on withdrawal option menu
 		do {
 			idxamount = displayMenuOfAmounts();
