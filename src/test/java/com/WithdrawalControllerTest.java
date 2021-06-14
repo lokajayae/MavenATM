@@ -13,6 +13,8 @@ import com.model.Transaction;
 import com.view.Keypad;
 import com.view.Screen;
 import com.model.Constants;
+import com.model.CashDispenser;
+
 /**
  * Unit test for controller CashDispenser
  */
@@ -189,8 +191,7 @@ public class WithdrawalControllerTest {
     }
 
     @Test
-    public void testOtherAmountwithBelowLimitInput()
-    {
+    public void testOtherAmountwithBelowLimitInput(){
         /**
          * Description : Mencoba method run pada cash withdrawal controller dengan input other amount
          * Input amount dibawah range yang disediakan
@@ -199,12 +200,27 @@ public class WithdrawalControllerTest {
         InputStream input = new ByteArrayInputStream(("6" + System.lineSeparator() + "0").getBytes());
         System.setIn(input);
         Keypad keypad = new Keypad();
-    	Screen screen = new Screen();
+        Screen screen = new Screen();
     	BankDatabase bankdb = new BankDatabase();
     	Transaction transaction = null;
     	WithdrawalController wdController = new WithdrawalController(transaction, keypad, screen);
 
         assertEquals(wdController.displayMenuOfAmounts(), constant.WITHDRAWAL_ERROR_RANGE_AMOUNT);
+    }
+    
+    @Test
+    public void testConstructorWithdrawalController(){
+        /**
+         * Melakukan pengujian untuk constructor kelas Withdrawal Controller
+         * Author : Nadia
+         */
+    	Keypad keypad = new Keypad();
+    	Screen screen = new Screen();
+    	BankDatabase bankdb = new BankDatabase();
+    	Transaction transaction = null;
+    	WithdrawalController wdController = new WithdrawalController(transaction, keypad, screen);
+
+        assertNotNull(wdController);
     }
 
     @Test
@@ -218,12 +234,29 @@ public class WithdrawalControllerTest {
         InputStream input = new ByteArrayInputStream(("6" + System.lineSeparator() + "520").getBytes());
         System.setIn(input);
         Keypad keypad = new Keypad();
-    	Screen screen = new Screen();
+        Screen screen = new Screen();
     	BankDatabase bankdb = new BankDatabase();
     	Transaction transaction = null;
     	WithdrawalController wdController = new WithdrawalController(transaction, keypad, screen);
 
         assertEquals(wdController.displayMenuOfAmounts(), constant.WITHDRAWAL_ERROR_RANGE_AMOUNT);
+    }
+    
+    @Test
+    public void testAmountValid()
+    {
+        /**
+         * Melakukan pengujian untuk amount yang valid
+         * Author : Nadia
+         */
+    	Keypad keypad = new Keypad();
+    	Screen screen = new Screen();
+    	BankDatabase bankdb = new BankDatabase();
+    	Transaction transaction = null;
+    	WithdrawalController wdController = new WithdrawalController(transaction, keypad, screen);
+
+        boolean expected = true;
+    	assertEquals(expected, wdController.rangeValidWithdrawAmount(200));
     }
 
     @Test
@@ -237,12 +270,29 @@ public class WithdrawalControllerTest {
         InputStream input = new ByteArrayInputStream(("6" + System.lineSeparator() + "45").getBytes());
         System.setIn(input);
         Keypad keypad = new Keypad();
-    	Screen screen = new Screen();
+        Screen screen = new Screen();
     	BankDatabase bankdb = new BankDatabase();
     	Transaction transaction = null;
     	WithdrawalController wdController = new WithdrawalController(transaction, keypad, screen);
 
         assertEquals(wdController.displayMenuOfAmounts(), constant.WITHDRAWAL_ERROR_INPUT_AMOUNT);
+    }
+    
+    @Test
+    public void testAmountMoreThanMax()
+    {
+        /**
+         * Melakukan pengujian untuk amount yang lebih dari batas maximal range
+         * Author : Nadia
+         */
+    	Keypad keypad = new Keypad();
+    	Screen screen = new Screen();
+    	BankDatabase bankdb = new BankDatabase();
+    	Transaction transaction = null;
+    	WithdrawalController wdController = new WithdrawalController(transaction, keypad, screen);
+
+        boolean expected = false;
+    	assertEquals(expected, wdController.rangeValidWithdrawAmount(600));
     }
 
     @Test
@@ -263,5 +313,101 @@ public class WithdrawalControllerTest {
 
         assertEquals(wdController.displayMenuOfAmounts(), 120);
     }
+    
+    @Test
+    public void testAmountLessThanMin()
+    {
+        /**
+         * Melakukan pengujian untuk amount yang kurang dari batas manimal range
+         * Author : Nadia
+         */
+    	Keypad keypad = new Keypad();
+    	Screen screen = new Screen();
+    	BankDatabase bankdb = new BankDatabase();
+    	Transaction transaction = null;
+    	WithdrawalController wdController = new WithdrawalController(transaction, keypad, screen);
 
+        boolean expected = false;
+    	assertEquals(expected, wdController.rangeValidWithdrawAmount(10));
+    }
+    
+    @Test
+    public void testAmountEqualToMin()
+    {
+        /**
+         * Melakukan pengujian untuk amount yang sama dengan batas manimal range
+         * Author : Nadia
+         */
+    	Keypad keypad = new Keypad();
+    	Screen screen = new Screen();
+    	BankDatabase bankdb = new BankDatabase();
+    	Transaction transaction = null;
+    	WithdrawalController wdController = new WithdrawalController(transaction, keypad, screen);
+    	boolean expected = false;
+    	assertEquals(expected, wdController.rangeValidWithdrawAmount(20));
+    }
+    
+    @Test
+    public void testAmountEqualToMax()
+    {
+        /**
+         * Melakukan pengujian untuk amount yang sama dengan batas maximal range
+         * Author : Nadia
+         */
+    	Keypad keypad = new Keypad();
+    	Screen screen = new Screen();
+    	BankDatabase bankdb = new BankDatabase();
+    	Transaction transaction = null;
+    	WithdrawalController wdController = new WithdrawalController(transaction, keypad, screen);
+    	boolean expected = false;
+    	assertEquals(expected, wdController.rangeValidWithdrawAmount(500));
+    }
+    
+    @Test
+    public void testAmountMultipleValidLimit()
+    {
+        /**
+         * Melakukan pengujian untuk amount apakah kelipatan 20 atau tidak
+         * Author : Nadia
+         */
+    	Keypad keypad = new Keypad();
+    	Screen screen = new Screen();
+    	BankDatabase bankdb = new BankDatabase();
+    	Transaction transaction = null;
+    	WithdrawalController wdController = new WithdrawalController(transaction, keypad, screen);
+    	boolean expected = true;
+    	assertEquals(expected, wdController.validWithdrawAmount(20));
+    }
+    
+    @Test
+    public void testAmountMultipleValid()
+    {
+        /**
+         * Melakukan pengujian untuk amount apakah kelipatan 20 atau tidak
+         * Author : Nadia
+         */
+    	Keypad keypad = new Keypad();
+    	Screen screen = new Screen();
+    	BankDatabase bankdb = new BankDatabase();
+    	Transaction transaction = null;
+    	WithdrawalController wdController = new WithdrawalController(transaction, keypad, screen);
+    	boolean expected = true;
+    	assertEquals(expected, wdController.validWithdrawAmount(400));
+    }
+    
+    @Test
+    public void testAmountMultipleInvalid()
+    {
+        /**
+         * Melakukan pengujian untuk amount apakah kelipatan 20 atau tidak
+         * Author : Nadia
+         */
+    	Keypad keypad = new Keypad();
+    	Screen screen = new Screen();
+    	BankDatabase bankdb = new BankDatabase();
+    	Transaction transaction = null;
+    	WithdrawalController wdController = new WithdrawalController(transaction, keypad, screen);
+    	boolean expected = false;
+    	assertEquals(expected, wdController.validWithdrawAmount(250));
+    }
 }

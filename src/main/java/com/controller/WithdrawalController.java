@@ -120,7 +120,7 @@ public class WithdrawalController extends TransactionController{
 		return userChoice; // return withdrawal amount or CANCELED
 	}
 	
-	private boolean rangeValidWithdrawAmount(int amount) {
+	public boolean rangeValidWithdrawAmount(int amount) {
 		if(amount> MIN_WITHDRAW_AMOUNT && amount< MAX_WITHDRAW_AMOUNT) {
 			return  true;
 		}else {
@@ -128,7 +128,7 @@ public class WithdrawalController extends TransactionController{
 		}
 	}
 	
-	private boolean validWithdrawAmount(int amount) {
+	public boolean validWithdrawAmount(int amount) {
 		if(amount % 20 == 0) {
 			return  true;
 		}else {

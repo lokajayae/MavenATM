@@ -27,5 +27,4 @@ public class WithdrawalModelTest {
         assertEquals(withdrawal.getAmount(), 90);
     }
 
-    
 }
