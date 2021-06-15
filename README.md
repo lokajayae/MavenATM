@@ -26,7 +26,7 @@ mvn clean verify sonar:sonar -D sonar.login=myToken
 ```
 
 ## Test Result
-- Number of Test Case : Not Available
-- Pass : Not Available
-- Fail : Not Available
-- Code Coverage : Not Available
+- Number of Test Case : 31
+- Pass : 29
+- Fail : 2
+- Code Coverage : 14.3%
