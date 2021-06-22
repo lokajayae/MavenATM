@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
+import org.junit.Ignore;
 import java.io.*;
 import java.util.Scanner;
 
@@ -15,6 +16,7 @@ import com.view.Keypad;
 import com.view.Screen;
 import com.model.Constants;
 import com.model.CashDispenser;
+import com.model.Account;
 
 /**
  * Unit test for controller CashDispenser
@@ -240,6 +242,7 @@ public class WithdrawalControllerTest {
     @Test
     public void testOtherAmountwithBelowLimitInput(){
         /**
+         * Test Case 4.4.4
          * Description : Mencoba method run pada cash withdrawal controller dengan input other amount
          * Input amount dibawah range yang disediakan
          * Author : Evan Lokajaya
@@ -258,6 +261,7 @@ public class WithdrawalControllerTest {
     @Test
     public void testConstructorWithdrawalController(){
         /**
+         * Unit Test
          * Melakukan pengujian untuk constructor kelas Withdrawal Controller
          * Author : Nadia
          */
@@ -274,6 +278,7 @@ public class WithdrawalControllerTest {
     public void testOtherAmountwithAboveLimitInput()
     {
         /**
+         * Test Case 4.4.5
          * Description : Mencoba method run pada cash withdrawal controller dengan input other amount
          * Input amount diatas range yang disediakan
          * Author : Evan Lokajaya
@@ -293,6 +298,7 @@ public class WithdrawalControllerTest {
     public void testAmountValid()
     {
         /**
+         * Unit Test
          * Melakukan pengujian untuk amount yang valid
          * Author : Nadia
          */
@@ -310,11 +316,12 @@ public class WithdrawalControllerTest {
     public void testOtherAmountwithInputNotMultipleOfTwenty()
     {
         /**
+         * Test Case 4.4.3
          * Description : Mencoba method run pada cash withdrawal controller dengan input other amount
          * Input amount dalam range yang disediakan namun bukan kelipatan 20
          * Author : Evan Lokajaya
          */
-        InputStream input = new ByteArrayInputStream(("6" + System.lineSeparator() + "45").getBytes());
+        InputStream input = new ByteArrayInputStream(("6" + System.lineSeparator() + "35").getBytes());
         System.setIn(input);
         Keypad keypad = new Keypad();
         Screen screen = new Screen();
@@ -329,6 +336,7 @@ public class WithdrawalControllerTest {
     public void testAmountMoreThanMax()
     {
         /**
+         * Unit Test
          * Melakukan pengujian untuk amount yang lebih dari batas maximal range
          * Author : Nadia
          */
@@ -346,11 +354,12 @@ public class WithdrawalControllerTest {
     public void testOtherAmountwithValidInput()
     {
         /**
+         * Test Case 4.4.11
          * Description : Mencoba method run pada cash withdrawal controller dengan input other amount
          * Input amount dalam range yang disediakan namun bukan kelipatan 20
          * Author : Evan Lokajaya
          */
-        InputStream input = new ByteArrayInputStream(("6" + System.lineSeparator() + "120").getBytes());
+        InputStream input = new ByteArrayInputStream(("6" + System.lineSeparator() + "100").getBytes());
         System.setIn(input);
         Keypad keypad = new Keypad();
     	Screen screen = new Screen();
@@ -358,13 +367,14 @@ public class WithdrawalControllerTest {
     	Transaction transaction = null;
     	WithdrawalController wdController = new WithdrawalController(transaction, keypad, screen);
 
-        assertEquals(wdController.displayMenuOfAmounts(), 120);
+        assertEquals(wdController.displayMenuOfAmounts(), 100);
     }
     
     @Test
     public void testAmountLessThanMin()
     {
         /**
+         * Unit Test
          * Melakukan pengujian untuk amount yang kurang dari batas manimal range
          * Author : Nadia
          */
@@ -382,6 +392,7 @@ public class WithdrawalControllerTest {
     public void testAmountEqualToMin()
     {
         /**
+         * Unit Test
          * Melakukan pengujian untuk amount yang sama dengan batas manimal range
          * Author : Nadia
          */
@@ -398,6 +409,7 @@ public class WithdrawalControllerTest {
     public void testAmountEqualToMax()
     {
         /**
+         * Unit Test
          * Melakukan pengujian untuk amount yang sama dengan batas maximal range
          * Author : Nadia
          */
@@ -414,6 +426,7 @@ public class WithdrawalControllerTest {
     public void testAmountMultipleValidLimit()
     {
         /**
+         * Unit Test
          * Melakukan pengujian untuk amount apakah kelipatan 20 atau tidak
          * Author : Nadia
          */
@@ -430,6 +443,7 @@ public class WithdrawalControllerTest {
     public void testAmountMultipleValid()
     {
         /**
+         * Unit Test
          * Melakukan pengujian untuk amount apakah kelipatan 20 atau tidak
          * Author : Nadia
          */
@@ -446,6 +460,7 @@ public class WithdrawalControllerTest {
     public void testAmountMultipleInvalid()
     {
         /**
+         * Unit Test
          * Melakukan pengujian untuk amount apakah kelipatan 20 atau tidak
          * Author : Nadia
          */
@@ -456,5 +471,187 @@ public class WithdrawalControllerTest {
     	WithdrawalController wdController = new WithdrawalController(transaction, keypad, screen);
     	boolean expected = false;
     	assertEquals(expected, wdController.validWithdrawAmount(250));
+    }
+
+    @Test
+    @Ignore
+    public void testForTestCase448()
+    {
+        /**
+         * Test Case 4.4.8
+         * Author : Evan Lokajaya
+         */
+    	InputStream input = new ByteArrayInputStream(("6" + System.lineSeparator() + "100").getBytes());
+        System.setIn(input);
+        
+        Keypad keypad = new Keypad();
+        Screen screen = new Screen();
+    	BankDatabase bankdb = new BankDatabase();
+    	CashDispenser cashDispenser = new CashDispenser();
+
+        //Set Up the PreConditions
+        bankdb.addAccount(new Account(4444, 4444, 210, 0, 2, 1));
+        cashDispenser.dispenseCash(120); // initial amount is 200 (10 lembar)
+
+        Withdrawal transaction = new Withdrawal(4444, bankdb, cashDispenser);
+        WithdrawalController wdController = new WithdrawalController(transaction, keypad, screen);
+
+        transaction.setAmount(100);
+        
+        //checking the result
+        assertEquals(transaction.execute(), constant.CASHDISPENSER_NOT_ENOUGH);
+
+    }
+
+    @Test
+    @Ignore
+    public void testForTestCase449()
+    {
+        /**
+         * Test Case 4.4.9
+         * Author : Evan Lokajaya
+         */
+    	InputStream input = new ByteArrayInputStream(("6" + System.lineSeparator() + "100").getBytes());
+        System.setIn(input);
+        
+        Keypad keypad = new Keypad();
+        Screen screen = new Screen();
+    	BankDatabase bankdb = new BankDatabase();
+    	CashDispenser cashDispenser = new CashDispenser();
+
+        //Set Up the PreConditions
+        bankdb.addAccount(new Account(4444, 4444, 210, 0, 2, 1));
+        cashDispenser.dispenseCash(140); // initial amount is 200 (10 lembar)
+
+        Withdrawal transaction = new Withdrawal(4444, bankdb, cashDispenser);
+        WithdrawalController wdController = new WithdrawalController(transaction, keypad, screen);
+
+        transaction.setAmount(100);
+        
+        //checking the result
+        assertEquals(transaction.execute(), constant.CASHDISPENSER_NOT_ENOUGH);
+
+    }
+
+    @Test
+    public void testForTestCase4410()
+    {
+        /**
+         * Test Case 4.4.10
+         * Author : Evan Lokajaya
+         */
+    	InputStream input = new ByteArrayInputStream(("6" + System.lineSeparator() + "100").getBytes());
+        System.setIn(input);
+        
+        Keypad keypad = new Keypad();
+        Screen screen = new Screen();
+    	BankDatabase bankdb = new BankDatabase();
+    	CashDispenser cashDispenser = new CashDispenser();
+
+        //Set Up the PreConditions
+        bankdb.addAccount(new Account(4444, 4444, 180, 0, 2, 1));
+        cashDispenser.dispenseCash(60); // initial amount is 200 (10 lembar)
+
+        Withdrawal transaction = new Withdrawal(4444, bankdb, cashDispenser);
+        WithdrawalController wdController = new WithdrawalController(transaction, keypad, screen);
+
+        transaction.setAmount(100);
+        
+        //checking the result
+        assertEquals(transaction.execute(), constant.BALANCE_NOT_ENOUGH);
+
+    }
+
+    @Test
+    @Ignore
+    public void testForTestCase4411()
+    {
+        /**
+         * Test Case 4.4.11
+         * Author : Evan Lokajaya
+         */
+    	InputStream input = new ByteArrayInputStream(("6" + System.lineSeparator() + "100").getBytes());
+        System.setIn(input);
+        
+        Keypad keypad = new Keypad();
+        Screen screen = new Screen();
+    	BankDatabase bankdb = new BankDatabase();
+    	CashDispenser cashDispenser = new CashDispenser();
+
+        //Set Up the PreConditions
+        bankdb.addAccount(new Account(4444, 4444, 210, 0, 2, 1));
+        cashDispenser.dispenseCash(80); // initial amount is 200 (10 lembar)
+
+        Withdrawal transaction = new Withdrawal(4444, bankdb, cashDispenser);
+        WithdrawalController wdController = new WithdrawalController(transaction, keypad, screen);
+
+        transaction.setAmount(100);
+        
+        //checking the result
+        assertEquals(transaction.execute(), constant.WITHDRAW_SUCCESSFUL);
+        assertEquals(bankdb.getDataAllAccount()[5].getAvailableBalance(), 110.0, 0);
+        assertEquals(cashDispenser.getCount(), 1);
+
+    }
+
+    @Test
+    public void testForTestCase4412()
+    {
+        /**
+         * Test Case 4.4.12
+         * Author : Evan Lokajaya
+         */
+    	InputStream input = new ByteArrayInputStream(("6" + System.lineSeparator() + "100").getBytes());
+        System.setIn(input);
+        
+        Keypad keypad = new Keypad();
+        Screen screen = new Screen();
+    	BankDatabase bankdb = new BankDatabase();
+    	CashDispenser cashDispenser = new CashDispenser();
+
+        //Set Up the PreConditions
+        bankdb.addAccount(new Account(4444, 4444, 200, 0, 2, 1));
+        cashDispenser.dispenseCash(80); // initial amount is 200 (10 lembar)
+
+        Withdrawal transaction = new Withdrawal(4444, bankdb, cashDispenser);
+        WithdrawalController wdController = new WithdrawalController(transaction, keypad, screen);
+
+        transaction.setAmount(100);
+        
+        //checking the result
+        assertEquals(transaction.execute(), constant.BALANCE_NOT_ENOUGH);
+
+    }
+
+    @Test
+    @Ignore
+    public void testForTestCase4413()
+    {
+        /**
+         * Test Case 4.4.13
+         * Author : Evan Lokajaya
+         */
+    	InputStream input = new ByteArrayInputStream(("6" + System.lineSeparator() + "100").getBytes());
+        System.setIn(input);
+        
+        Keypad keypad = new Keypad();
+        Screen screen = new Screen();
+    	BankDatabase bankdb = new BankDatabase();
+    	CashDispenser cashDispenser = new CashDispenser();
+
+        //Set Up the PreConditions
+        bankdb.addAccount(new Account(4444, 4444, 210, 0, 2, 1));
+        cashDispenser.dispenseCash(60); // initial amount is 200 (10 lembar)
+
+        Withdrawal transaction = new Withdrawal(4444, bankdb, cashDispenser);
+        WithdrawalController wdController = new WithdrawalController(transaction, keypad, screen);
+
+        transaction.setAmount(100);
+        
+        //checking the result
+        assertEquals(transaction.execute(), constant.WITHDRAW_SUCCESSFUL);
+        assertEquals(bankdb.getDataAllAccount()[5].getAvailableBalance(), 110.0, 0);
+        assertEquals(cashDispenser.getCount(), 1);
+
     }
 }   
