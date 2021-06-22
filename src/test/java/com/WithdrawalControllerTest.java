@@ -10,6 +10,7 @@ import java.util.Scanner;
 import com.controller.WithdrawalController;
 import com.model.BankDatabase;
 import com.model.Transaction;
+import com.model.Withdrawal;
 import com.view.Keypad;
 import com.view.Screen;
 import com.model.Constants;
@@ -50,6 +51,7 @@ public class WithdrawalControllerTest {
     public void testMenuWithInputOne()
     {
         /**
+         * Test Case 4.3.6
          * Description : Mencoba method run pada cash withdrawal controller dengan input 1
          * Author : Evan Lokajaya
          */
@@ -68,6 +70,7 @@ public class WithdrawalControllerTest {
     public void testMenuWithInputTwo()
     {
         /**
+         * Test Case 4.3.7
          * Description : Mencoba method run pada cash withdrawal controller dengan input 2
          * Author : Evan Lokajaya
          */
@@ -86,6 +89,7 @@ public class WithdrawalControllerTest {
     public void testMenuWithInputThree()
     {
         /**
+         * Test Case 4.3.8
          * Description : Mencoba method run pada cash withdrawal controller dengan input 3
          * Author : Evan Lokajaya
          */
@@ -104,6 +108,7 @@ public class WithdrawalControllerTest {
     public void testMenuWithInputFour()
     {
         /**
+         * Test Case 4.3.9
          * Description : Mencoba method run pada cash withdrawal controller dengan input 4
          * Author : Evan Lokajaya
          */
@@ -122,6 +127,7 @@ public class WithdrawalControllerTest {
     public void testMenuWithInputFive()
     {
         /**
+         * Test Case 4.3.10
          * Description : Mencoba method run pada cash withdrawal controller dengan input 5
          * Author : Evan Lokajaya
          */
@@ -140,6 +146,7 @@ public class WithdrawalControllerTest {
     public void testMenuWithInputSeven()
     {
         /**
+         * Test Case 4.3.5
          * Description : Mencoba method run pada cash withdrawal controller dengan input 7
          * Author : Evan Lokajaya
          */
@@ -158,6 +165,7 @@ public class WithdrawalControllerTest {
     public void testMenuWithInputBelowOne()
     {
         /**
+         * Test Case 4.3.1
          * Description : Mencoba method run pada cash withdrawal controller dengan input dibawah batas bawah
          * Author : Evan Lokajaya
          */
@@ -176,10 +184,49 @@ public class WithdrawalControllerTest {
     public void testMenuWithInputAboveSeven()
     {
         /**
+         * Test Case 4.3.2
          * Description : Mencoba method run pada cash withdrawal controller dengan input diatas batas atas
          * Author : Evan Lokajaya
          */
         InputStream input = new ByteArrayInputStream("8".getBytes());
+        System.setIn(input);
+        Keypad keypad = new Keypad();
+    	Screen screen = new Screen();
+    	BankDatabase bankdb = new BankDatabase();
+    	Transaction transaction = null;
+    	WithdrawalController wdController = new WithdrawalController(transaction, keypad, screen);
+
+        assertEquals(wdController.displayMenuOfAmounts(), constant.WITHDRAWAL_ERROR_INPUT_MENU);
+    }
+
+    @Test
+    public void testMenuWithInputBelowOneWithN()
+    {
+        /**
+         * Test Case 4.3.3
+         * Description : Mencoba method run pada cash withdrawal controller dengan input dibawah batas bawah
+         * Author : Evan Lokajaya
+         */
+        InputStream input = new ByteArrayInputStream("-3".getBytes());
+        System.setIn(input);
+        Keypad keypad = new Keypad();
+    	Screen screen = new Screen();
+    	BankDatabase bankdb = new BankDatabase();
+    	Transaction transaction = null;
+    	WithdrawalController wdController = new WithdrawalController(transaction, keypad, screen);
+
+        assertEquals(wdController.displayMenuOfAmounts(), constant.WITHDRAWAL_ERROR_INPUT_MENU);
+    }
+
+    @Test
+    public void testMenuWithInputAboveSevenWithN()
+    {
+        /**
+         * Test Case 4.3.4
+         * Description : Mencoba method run pada cash withdrawal controller dengan input diatas batas atas
+         * Author : Evan Lokajaya
+         */
+        InputStream input = new ByteArrayInputStream("9".getBytes());
         System.setIn(input);
         Keypad keypad = new Keypad();
     	Screen screen = new Screen();
@@ -410,4 +457,4 @@ public class WithdrawalControllerTest {
     	boolean expected = false;
     	assertEquals(expected, wdController.validWithdrawAmount(250));
     }
-}
+}   

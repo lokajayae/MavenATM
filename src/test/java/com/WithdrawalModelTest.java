@@ -25,6 +25,7 @@ public class WithdrawalModelTest {
     public void constructorCreationSucceedTest()
     {
         /**
+         * Unit Test
          * Description: menguji proses pembuatan objek model Withdrawal.
          * Author: Zara Veda
          */
@@ -39,6 +40,7 @@ public class WithdrawalModelTest {
     public void testSetAmount()
     {
         /**
+         * Unit Test
          * Description : Menguji fungsi set amount pada model withdrawal
          * Author
          */
@@ -53,6 +55,7 @@ public class WithdrawalModelTest {
     public void getAmountTest()
     {
         /**
+         * Unit Test
          * Description: Menguji fungsionalitas fungsi getAmount.
          * Author: Zara Veda
          */
@@ -72,6 +75,7 @@ public class WithdrawalModelTest {
     public void executeRemainingCashDispenserEqualToZeroTest()
     {
         /**
+         * Unit Test
          * Description: Menguji proses Withdrawal jika Cash Dispenser kurang.
          * Author: Zara Veda
          */
@@ -91,6 +95,7 @@ public class WithdrawalModelTest {
     public void executeRemainingCashDispenserEqualToOneTest()
     {
         /**
+         * Unit Test
          * Description: Menguji proses Withdrawal jika Cash Dispenser kurang.
          * Author: Zara Veda
          */
@@ -109,6 +114,7 @@ public class WithdrawalModelTest {
     public void executeBalanceNotEnoughTest()
     {
         /**
+         * Unit Test
          * Description: Menguji proses Withdrawal jika Avl. Balance kurang.
          * Author: Zara Veda
          */
@@ -127,6 +133,7 @@ public class WithdrawalModelTest {
     public void executeWithdrawSuccessfulTest()
     {
         /**
+         * Unit Test
          * Description: Menguji proses Withdrawal jika Avl. Balance dan Cash Dispenser cukup.
          * Author: Zara Veda
          */
@@ -145,6 +152,7 @@ public class WithdrawalModelTest {
     public void executeWithdrawalCanceledTest()
     {
         /**
+         * Unit Test
          * Description: Menguji proses pembatalan Withdrawal.
          * Author: Zara Veda
          */
