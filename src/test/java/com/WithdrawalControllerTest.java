@@ -654,4 +654,122 @@ public class WithdrawalControllerTest {
         assertEquals(cashDispenser.getCount(), 1);
 
     }
+
+    @Test
+    public void testForTestCase4414()
+    {
+        /**
+         * Test Case 4.4.14
+         * Author : Zara Veda
+         */
+    	InputStream input = new ByteArrayInputStream(("6" + System.lineSeparator() + "100").getBytes());
+        System.setIn(input);
+        
+        Keypad keypad = new Keypad();
+        Screen screen = new Screen();
+    	BankDatabase bankdb = new BankDatabase();
+    	CashDispenser cashDispenser = new CashDispenser();
+
+        //Set Up the PreConditions
+        bankdb.addAccount(new Account(4444, 4444, 200, 0, 2, 1));
+        cashDispenser.dispenseCash(60); // initial amount is 200 (10 lembar)
+
+        Withdrawal transaction = new Withdrawal(4444, bankdb, cashDispenser);
+        WithdrawalController wdController = new WithdrawalController(transaction, keypad, screen);
+
+        transaction.setAmount(100);
+        
+        //checking the result
+        assertEquals(transaction.execute(), constant.BALANCE_NOT_ENOUGH);
+    }
+
+    @Test
+    public void testForTestCase4415()
+    {
+        /**
+         * Test Case 4.4.15
+         * Author : Zara Veda
+         */
+    	InputStream input = new ByteArrayInputStream(("6" + System.lineSeparator() + "100").getBytes());
+        System.setIn(input);
+        
+        Keypad keypad = new Keypad();
+        Screen screen = new Screen();
+    	BankDatabase bankdb = new BankDatabase();
+    	CashDispenser cashDispenser = new CashDispenser();
+
+        //Set Up the PreConditions
+        bankdb.addAccount(new Account(4444, 4444, 180, 0, 2, 1));
+        cashDispenser.dispenseCash(5); // initial amount is 200 (10 lembar)
+
+        Withdrawal transaction = new Withdrawal(4444, bankdb, cashDispenser);
+        WithdrawalController wdController = new WithdrawalController(transaction, keypad, screen);
+
+        transaction.setAmount(100);
+        
+        //checking the result
+        assertEquals(transaction.execute(), constant.BALANCE_NOT_ENOUGH);
+    }
+
+    @Test
+    @Ignore
+    public void testForTestCase4416()
+    {
+        /**
+         * Test Case 4.4.16
+         * Author : Zara Veda
+         */
+    	InputStream input = new ByteArrayInputStream(("6" + System.lineSeparator() + "100").getBytes());
+        System.setIn(input);
+        
+        Keypad keypad = new Keypad();
+        Screen screen = new Screen();
+    	BankDatabase bankdb = new BankDatabase();
+    	CashDispenser cashDispenser = new CashDispenser();
+
+        //Set Up the PreConditions
+        bankdb.addAccount(new Account(4444, 4444, 200, 0, 2, 1));
+        cashDispenser.dispenseCash(5); // initial amount is 200 (10 lembar)
+
+        Withdrawal transaction = new Withdrawal(4444, bankdb, cashDispenser);
+        WithdrawalController wdController = new WithdrawalController(transaction, keypad, screen);
+
+        transaction.setAmount(100);
+        
+        //checking the result
+        assertEquals(transaction.execute(), constant.WITHDRAW_SUCCESSFUL);
+        assertEquals(bankdb.getDataAllAccount()[5].getAvailableBalance(), 110.0, 0);
+        assertEquals(cashDispenser.getCount(), 1);
+    }
+
+    @Test
+    @Ignore
+    public void testForTestCase4417()
+    {
+        /**
+         * Test Case 4.4.17
+         * Author : Zara Veda
+         */
+    	InputStream input = new ByteArrayInputStream(("6" + System.lineSeparator() + "100").getBytes());
+        System.setIn(input);
+        
+        Keypad keypad = new Keypad();
+        Screen screen = new Screen();
+    	BankDatabase bankdb = new BankDatabase();
+    	CashDispenser cashDispenser = new CashDispenser();
+
+        //Set Up the PreConditions
+        bankdb.addAccount(new Account(4444, 4444, 210, 0, 2, 1));
+        cashDispenser.dispenseCash(5); // initial amount is 200 (10 lembar)
+
+        Withdrawal transaction = new Withdrawal(4444, bankdb, cashDispenser);
+        WithdrawalController wdController = new WithdrawalController(transaction, keypad, screen);
+
+        transaction.setAmount(100);
+        
+        //checking the result
+        assertEquals(transaction.execute(), constant.WITHDRAW_SUCCESSFUL);
+        assertEquals(bankdb.getDataAllAccount()[5].getAvailableBalance(), 110.0, 0);
+        assertEquals(cashDispenser.getCount(), 1);
+    }
 }   
