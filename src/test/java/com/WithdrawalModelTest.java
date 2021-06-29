@@ -71,7 +71,7 @@ public class WithdrawalModelTest {
     }
 
     @Test
-    @Ignore
+    // @Ignore
     public void executeRemainingCashDispenserEqualToZeroTest()
     {
         /**
@@ -91,7 +91,7 @@ public class WithdrawalModelTest {
     }
 
     @Test
-    @Ignore
+    // @Ignore
     public void executeRemainingCashDispenserEqualToOneTest()
     {
         /**
