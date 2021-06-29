@@ -367,7 +367,7 @@ public class WithdrawalControllerTest {
     	Transaction transaction = null;
     	WithdrawalController wdController = new WithdrawalController(transaction, keypad, screen);
 
-        assertEquals(wdController.displayMenuOfAmounts(), 100);
+        assertEquals(100, wdController.displayMenuOfAmounts());
     }
     
     @Test
@@ -501,7 +501,7 @@ public class WithdrawalControllerTest {
         transaction.setAmount(100);
         
         //checking the result
-        assertEquals(transaction.execute(), constant.CASHDISPENSER_NOT_ENOUGH);
+        assertEquals(constant.CASHDISPENSER_NOT_ENOUGH, transaction.execute());
 
     }
 
@@ -531,7 +531,7 @@ public class WithdrawalControllerTest {
         transaction.setAmount(100);
         
         //checking the result
-        assertEquals(transaction.execute(), constant.CASHDISPENSER_NOT_ENOUGH);
+        assertEquals(constant.CASHDISPENSER_NOT_ENOUGH, transaction.execute());
 
     }
 
@@ -560,7 +560,7 @@ public class WithdrawalControllerTest {
         transaction.setAmount(100);
         
         //checking the result
-        assertEquals(transaction.execute(), constant.BALANCE_NOT_ENOUGH);
+        assertEquals(constant.BALANCE_NOT_ENOUGH, transaction.execute());
 
     }
 
@@ -591,8 +591,8 @@ public class WithdrawalControllerTest {
         
         //checking the result
         assertEquals(transaction.execute(), constant.WITHDRAW_SUCCESSFUL);
-        assertEquals(bankdb.getDataAllAccount()[5].getAvailableBalance(), 110.0, 0);
-        assertEquals(cashDispenser.getCount(), 1);
+        assertEquals(110.0, bankdb.getDataAllAccount()[5].getAvailableBalance(), 0);
+        assertEquals(1, cashDispenser.getCount());
 
     }
 
@@ -621,7 +621,7 @@ public class WithdrawalControllerTest {
         transaction.setAmount(100);
         
         //checking the result
-        assertEquals(transaction.execute(), constant.BALANCE_NOT_ENOUGH);
+        assertEquals(constant.BALANCE_NOT_ENOUGH, transaction.execute());
 
     }
 
@@ -651,9 +651,9 @@ public class WithdrawalControllerTest {
         transaction.setAmount(100);
         
         //checking the result
-        assertEquals(transaction.execute(), constant.WITHDRAW_SUCCESSFUL);
-        assertEquals(bankdb.getDataAllAccount()[5].getAvailableBalance(), 110.0, 0);
-        assertEquals(cashDispenser.getCount(), 1);
+        assertEquals(constant.WITHDRAW_SUCCESSFUL, transaction.execute());
+        assertEquals(110.0, bankdb.getDataAllAccount()[5].getAvailableBalance(), 0);
+        assertEquals(1, cashDispenser.getCount());
 
     }
 
@@ -682,7 +682,7 @@ public class WithdrawalControllerTest {
         transaction.setAmount(100);
         
         //checking the result
-        assertEquals(transaction.execute(), constant.BALANCE_NOT_ENOUGH);
+        assertEquals(constant.BALANCE_NOT_ENOUGH, transaction.execute());
     }
 
     @Test
@@ -710,7 +710,7 @@ public class WithdrawalControllerTest {
         transaction.setAmount(100);
         
         //checking the result
-        assertEquals(transaction.execute(), constant.BALANCE_NOT_ENOUGH);
+        assertEquals(constant.BALANCE_NOT_ENOUGH, transaction.execute());
     }
 
     @Test
@@ -739,9 +739,9 @@ public class WithdrawalControllerTest {
         transaction.setAmount(100);
         
         //checking the result
-        assertEquals(transaction.execute(), constant.WITHDRAW_SUCCESSFUL);
+        assertEquals(constant.WITHDRAW_SUCCESSFUL, transaction.execute());
         assertEquals(bankdb.getDataAllAccount()[5].getAvailableBalance(), 110.0, 0);
-        assertEquals(cashDispenser.getCount(), 1);
+        assertEquals(1, cashDispenser.getCount());
     }
 
     @Test
@@ -770,8 +770,8 @@ public class WithdrawalControllerTest {
         transaction.setAmount(100);
         
         //checking the result
-        assertEquals(transaction.execute(), constant.WITHDRAW_SUCCESSFUL);
-        assertEquals(bankdb.getDataAllAccount()[5].getAvailableBalance(), 110.0, 0);
-        assertEquals(cashDispenser.getCount(), 1);
+        assertEquals(constant.WITHDRAW_SUCCESSFUL, transaction.execute());
+        assertEquals(110.0, bankdb.getDataAllAccount()[5].getAvailableBalance(), 0);
+        assertEquals(1, cashDispenser.getCount());
     }
 }   
