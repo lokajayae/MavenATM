@@ -291,7 +291,7 @@ public class WithdrawalControllerTest {
     	Transaction transaction = null;
     	WithdrawalController wdController = new WithdrawalController(transaction, keypad, screen);
 
-        assertEquals(wdController.displayMenuOfAmounts(), constant.WITHDRAWAL_ERROR_RANGE_AMOUNT);
+        assertEquals(constant.WITHDRAWAL_ERROR_RANGE_AMOUNT, wdController.displayMenuOfAmounts());
     }
     
     @Test
@@ -329,7 +329,7 @@ public class WithdrawalControllerTest {
     	Transaction transaction = null;
     	WithdrawalController wdController = new WithdrawalController(transaction, keypad, screen);
 
-        assertEquals(wdController.displayMenuOfAmounts(), constant.WITHDRAWAL_ERROR_INPUT_AMOUNT);
+        assertEquals(constant.WITHDRAWAL_ERROR_INPUT_AMOUNT, wdController.displayMenuOfAmounts());
     }
     
     @Test
@@ -590,7 +590,7 @@ public class WithdrawalControllerTest {
         transaction.setAmount(100);
         
         //checking the result
-        assertEquals(transaction.execute(), constant.WITHDRAW_SUCCESSFUL);
+        assertEquals(constant.WITHDRAW_SUCCESSFUL, transaction.execute());
         assertEquals(110.0, bankdb.getDataAllAccount()[5].getAvailableBalance(), 0);
         assertEquals(1, cashDispenser.getCount());
 
