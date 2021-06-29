@@ -394,6 +394,7 @@ public class WithdrawalControllerTest {
         /**
          * Unit Test
          * Melakukan pengujian untuk amount yang sama dengan batas manimal range
+         * 4.4.6
          * Author : Nadia
          */
     	Keypad keypad = new Keypad();
@@ -411,6 +412,7 @@ public class WithdrawalControllerTest {
         /**
          * Unit Test
          * Melakukan pengujian untuk amount yang sama dengan batas maximal range
+         * 4.4.7
          * Author : Nadia
          */
     	Keypad keypad = new Keypad();
@@ -474,7 +476,7 @@ public class WithdrawalControllerTest {
     }
 
     @Test
-    @Ignore
+    // @Ignore
     public void testForTestCase448()
     {
         /**
@@ -504,7 +506,7 @@ public class WithdrawalControllerTest {
     }
 
     @Test
-    @Ignore
+    // @Ignore
     public void testForTestCase449()
     {
         /**
@@ -563,7 +565,7 @@ public class WithdrawalControllerTest {
     }
 
     @Test
-    @Ignore
+    // @Ignore
     public void testForTestCase4411()
     {
         /**
@@ -624,7 +626,7 @@ public class WithdrawalControllerTest {
     }
 
     @Test
-    @Ignore
+    // @Ignore
     public void testForTestCase4413()
     {
         /**
@@ -712,7 +714,7 @@ public class WithdrawalControllerTest {
     }
 
     @Test
-    @Ignore
+    // @Ignore
     public void testForTestCase4416()
     {
         /**
@@ -743,7 +745,7 @@ public class WithdrawalControllerTest {
     }
 
     @Test
-    @Ignore
+    // @Ignore
     public void testForTestCase4417()
     {
         /**
